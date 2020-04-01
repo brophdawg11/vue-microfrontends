@@ -1,11 +1,11 @@
 <template>
-  <div class="about">
-    <h1>About Page 2</h1>
-  </div>
+    <div class="about">
+        <h1>App2 About Page</h1>
+    </div>
 </template>
 
 <style scoped>
 .about {
-    color: blue;
+    font-style: italic;
 }
 </style>

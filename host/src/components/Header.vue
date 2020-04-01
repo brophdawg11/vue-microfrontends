@@ -1,26 +1,24 @@
 <template>
-  <header class="header">
-    <span class="title">Header</span>
-    <ul class="list">
-      <li v-for="app in apps" :key="app.slug" class="list-item">
-        <a class="link" :href="`/${app.slug}`">{{app.name}}</a>
-      </li>
-    </ul>
-  </header>
+    <header class="header">
+        <span class="title">Host Header</span>
+        <nav class="nav">
+            <ul class="list">
+                <li class="list-item">
+                    <a class="link" href="/app1">App1 Home</a>
+                </li>
+                <li class="list-item">
+                    <a class="link" href="/app1/about">App1 About</a>
+                </li>
+                <li class="list-item">
+                    <a class="link" href="/app2">App2 Home</a>
+                </li>
+                <li class="list-item">
+                    <a class="link" href="/app2/about">App2 About</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
 </template>
-
-<script>
-import appManifest from '../../app-manifest.json';
-
-export default {
-  name: 'Header',
-  data() {
-    return {
-      apps: appManifest.apps,
-    };
-  }
-}
-</script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
@@ -32,6 +30,10 @@ export default {
 
 .title {
     margin-right: 1rem;
+}
+
+.nav {
+    display: inline;
 }
 
 .list {

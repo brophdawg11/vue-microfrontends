@@ -1,11 +1,11 @@
 <template>
-  <div class="home">
-    <h1>Home Page 2</h1>
-  </div>
+    <div class="home">
+        <h1>App2 Home Page</h1>
+    </div>
 </template>
 
 <style scoped>
 .home {
-    color: red;
+    font-style: italic;
 }
 </style>

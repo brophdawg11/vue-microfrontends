@@ -1,11 +1,12 @@
 <template>
-  <div :id="slug" class="app">
-    <div id="nav">
-      <router-link to="/">Home 1</router-link> |
-      <router-link to="/about">About 1</router-link>
+    <div :id="slug" class="app">
+        <div id="nav">
+            <span class="title">App1 Header</span>
+            <router-link to="/">App1 Home</router-link> |
+            <router-link to="/about">App1 About</router-link>
+        </div>
+        <router-view/>
     </div>
-    <router-view/>
-  </div>
 </template>
 
 <script>
@@ -18,9 +19,13 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .app {
     padding: 20px;
     text-align: center;
+}
+
+.title {
+    margin-right: 1rem;
 }
 </style>

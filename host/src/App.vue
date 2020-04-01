@@ -1,8 +1,9 @@
 <template>
     <div id="host">
         <Header />
-        <div ref="container" v-once>
-            <div />
+        <Loader v-show="showLoader" />
+        <div v-show="!showLoader" ref="container" class="container">
+            <div v-once></div>
         </div>
         <Footer />
     </div>
@@ -12,12 +13,19 @@
 import appManifest from '../app-manifest.json';
 import Header from './components/Header.vue'
 import Footer from './components/Footer.vue'
+import Loader from './components/Loader.vue'
 
 export default {
     name: 'App',
     components: {
         Header,
-        Footer
+        Footer,
+        Loader
+    },
+    data() {
+        return {
+            showLoader: true,
+        };
     },
     mounted() {
         this.loadSubApp();
@@ -36,6 +44,8 @@ export default {
             if (!app) {
                 throw new Error(`No subapp found for slug: ${pathSlug}`);
             }
+
+            this.showLoader = true;
 
             // Clear the container el and assign the proper id for the subapp to mount into
             const el = this.$refs.container.childNodes[0];
@@ -63,6 +73,8 @@ export default {
                 (acc, f) => acc.then(() => this.loadAsset(f)),
                 Promise.resolve(),
             );
+
+            this.showLoader = false;
         },
         loadAsset(path) {
             return new Promise((resolve, reject) => {
@@ -91,9 +103,13 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 * {
     margin: 0;
     padding: 0;
+}
+
+.container {
+    min-height: 300px;
 }
 </style>
