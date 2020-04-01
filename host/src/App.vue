@@ -1,6 +1,6 @@
 <template>
     <div id="host">
-        <Header />
+        <Header @route-change="onRouteChange" />
         <Loader v-show="showLoader" />
         <div v-show="!showLoader" ref="container" class="container">
             <div v-once></div>
@@ -29,6 +29,11 @@ export default {
     },
     mounted() {
         this.loadSubApp();
+
+        window.addEventListener('popstate', (e) => {
+            console.log(e.state);
+        });
+        window.onpopstate = (e) => console.error(e);
     },
     methods: {
         async loadSubApp() {
@@ -68,6 +73,8 @@ export default {
                 ...initial.filter(f => /\.js/.test(f)),
             ];
 
+            console.log('Loading ordered assets', ordered);
+
             // Load initial chunks in sequence
             await ordered.reduce(
                 (acc, f) => acc.then(() => this.loadAsset(f)),
@@ -98,6 +105,9 @@ export default {
                     reject(new Error(`Invalid file type in loadAsset: ${path}`));
                 }
             });
+        },
+        onRouteChange() {
+            this.loadSubApp();
         },
     }
 }
